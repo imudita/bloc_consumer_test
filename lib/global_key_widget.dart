@@ -15,22 +15,15 @@ class GlobalKeyWidget extends StatefulWidget {
   });
 
   @override
-  State<GlobalKeyWidget> createState() => _GlobalKeyWidgetState();
+  State<GlobalKeyWidget> createState() => GlobalKeyWidgetState();
 }
 
-class _GlobalKeyWidgetState extends State<GlobalKeyWidget> {
+class GlobalKeyWidgetState extends State<GlobalKeyWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer(
       bloc: widget.simpleBloc,
-      listener: (context, state) {
-        if (state is SimpleAState) {
-          widget.onListenerA('A');
-        }
-        if (state is SimpleBState) {
-          widget.onListenerB('B');
-        }
-      },
+      listener: blockListener,
       builder: (context, state) {
         return Column(
           children: [
@@ -50,5 +43,14 @@ class _GlobalKeyWidgetState extends State<GlobalKeyWidget> {
         );
       },
     );
+  }
+
+  void blockListener(context, state) {
+    if (state is SimpleAState) {
+      widget.onListenerA('A');
+    }
+    if (state is SimpleBState) {
+      widget.onListenerB('B');
+    }
   }
 }
