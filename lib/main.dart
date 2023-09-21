@@ -1,4 +1,5 @@
 import 'package:bloc_consumer_test/bloc/simple_bloc.dart';
+import 'package:bloc_consumer_test/global_key_widget.dart';
 import 'package:bloc_consumer_test/when_listen_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +44,19 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             WhenListenWidget(
+              simpleBloc: simpleBloc,
+              onListenerA: (data) {
+                setState(() {
+                  title = data;
+                });
+              },
+              onListenerB: (data) {
+                setState(() {
+                  title = data;
+                });
+              },
+            ),
+            GlobalKeyWidget(
               simpleBloc: simpleBloc,
               onListenerA: (data) {
                 setState(() {
